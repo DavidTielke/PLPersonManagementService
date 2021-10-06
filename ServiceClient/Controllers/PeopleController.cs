@@ -4,7 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FluentValidation;
 using ServiceClient.Services;
+using ServiceClient.Validators;
 
 namespace ServiceClient.Controllers
 {
@@ -13,10 +15,12 @@ namespace ServiceClient.Controllers
     public class PeopleController : ControllerBase
     {
         private readonly IPersonManager _manager;
+        private readonly IValidator<Person> _validator;
 
-        public PeopleController(IPersonManager manager)
+        public PeopleController(IPersonManager manager, IValidator<Person> validator)
         {
             _manager = manager;
+            _validator = validator;
         }
 
         [HttpGet]
@@ -30,6 +34,8 @@ namespace ServiceClient.Controllers
         [HttpPost]
         public IActionResult Post(Person person)
         {
+            _validator.ValidateAndThrow(person);
+
             _manager.Add(person);
 
             return Ok(person);

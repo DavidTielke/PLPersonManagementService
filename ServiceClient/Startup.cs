@@ -11,7 +11,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FluentValidation;
 using ServiceClient.Services;
+using ServiceClient.Validators;
 
 namespace ServiceClient
 {
@@ -29,6 +31,7 @@ namespace ServiceClient
         {
             services.AddTransient<IPersonManager, PersonManager>();
             services.AddSingleton<IPersonRepository, PersonRepository>();
+            services.AddTransient<IValidator<Person>, PeoplePostValidator>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
