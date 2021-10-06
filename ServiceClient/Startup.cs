@@ -28,7 +28,7 @@ namespace ServiceClient
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<IPersonManager, PersonManager>();
-            services.AddTransient<IPersonRepository, PersonRepository>();
+            services.AddSingleton<IPersonRepository, PersonRepository>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

@@ -17,5 +17,10 @@ namespace ServiceClient.Services
         {
             return _repository.Load();
         }
+
+        public void Add(Person person)
+        {
+            _repository.Insert(person);
+        }
     }
 }

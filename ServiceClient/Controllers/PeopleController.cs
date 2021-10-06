@@ -25,5 +25,14 @@ namespace ServiceClient.Controllers
             var people = _manager.Load().ToList();
             return people;
         }
+
+
+        [HttpPost]
+        public IActionResult Post(Person person)
+        {
+            _manager.Add(person);
+
+            return Ok(person);
+        }
     }
 }
