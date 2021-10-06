@@ -14,10 +14,6 @@ namespace ServiceClient.Services
         public PersonRepository(IPersonInsertValidator insertValidator)
         {
             _insertValidator = insertValidator;
-        }
-
-        public PersonRepository()
-        {
             _persons = new List<Person>
             {
                 new Person(1, "David", 37),
@@ -34,6 +30,11 @@ namespace ServiceClient.Services
         public void Insert(Person person)
         {
             _insertValidator.ValidateAndThrow(person);
+
+            if (_persons.Count >= 3)
+            {
+                throw new DataStoreException("Can't store more than 5 people");
+            }
 
             person.Id = _persons.Max(p => p.Id) + 1;
             _persons.Add(person);

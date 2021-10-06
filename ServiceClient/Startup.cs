@@ -58,6 +58,8 @@ namespace ServiceClient
 
             app.UseAuthorization();
 
+            app.UseMiddleware<ExceptionDetailMiddleware>();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

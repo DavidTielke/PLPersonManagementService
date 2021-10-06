@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using FluentValidation;
 using ServiceClient.Validators;
@@ -27,7 +26,14 @@ namespace ServiceClient.Services
         {
             _addValidator.ValidateAndThrow(person);
 
-            _repository.Insert(person);
+            try
+            {
+                _repository.Insert(person);
+            }
+            catch (DataStoreException e)
+            {
+                throw new PersonProcessException("Error adding person to datastore", e);
+            }
         }
     }
 }

@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using FluentValidation;
 using ServiceClient.Services;
@@ -37,6 +38,7 @@ namespace ServiceClient.Controllers
             _validator.ValidateAndThrow(person);
 
             _manager.Add(person);
+
 
             return Ok(person);
         }
