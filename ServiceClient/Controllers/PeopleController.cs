@@ -15,9 +15,9 @@ namespace ServiceClient.Controllers
     public class PeopleController : ControllerBase
     {
         private readonly IPersonManager _manager;
-        private readonly IValidator<Person> _validator;
+        private readonly IPersonPostValidator _validator;
 
-        public PeopleController(IPersonManager manager, IValidator<Person> validator)
+        public PeopleController(IPersonManager manager, IPersonPostValidator validator)
         {
             _manager = manager;
             _validator = validator;

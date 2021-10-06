@@ -31,7 +31,9 @@ namespace ServiceClient
         {
             services.AddTransient<IPersonManager, PersonManager>();
             services.AddSingleton<IPersonRepository, PersonRepository>();
-            services.AddTransient<IValidator<Person>, PeoplePostValidator>();
+            services.AddTransient<IPersonPostValidator, PersonPostValidator>();
+            services.AddTransient<IPersonAddValidator, PersonAddValidator>();
+            services.AddTransient<IPersonInsertValidator, PersonInsertValidator>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

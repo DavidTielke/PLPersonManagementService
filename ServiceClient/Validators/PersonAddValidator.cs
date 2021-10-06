@@ -7,12 +7,15 @@ using ServiceClient.Services;
 
 namespace ServiceClient.Validators
 {
-    public class PeoplePostValidator : AbstractValidator<Person>
+    public class PersonAddValidator : AbstractValidator<Person>, IPersonAddValidator
     {
-        public PeoplePostValidator()
+        public PersonAddValidator()
         {
             RuleFor(p => p).NotNull();
-            RuleFor(p => p.Name).NotNull();
+
+            RuleFor(p => p.Name).NotNull().MinimumLength(3);
+
+            RuleFor(p => p.Age).GreaterThanOrEqualTo(16);
         }
     }
 }
